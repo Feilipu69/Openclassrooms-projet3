@@ -1,8 +1,4 @@
-function Diaporama(img1, img2, img3){
-	this.img1 = document.getElementsByTagName("img")[0].setAttribute("src", img1);
-	this.img2 = document.getElementsByTagName("img")[1].setAttribute("src", img2);
-	this.img3 = document.getElementsByTagName("img")[2].setAttribute("src", img3);
-
+function Diaporama(){
 	this.prevNext = function(){
 		var slideIndex = 1;
 		showSlides(slideIndex);
@@ -73,6 +69,5 @@ function Diaporama(img1, img2, img3){
 	};
 }
 
-var diapo1 = new Diaporama("veloUn.jpeg", "veloDeux.jpeg", "veloTrois.jpeg");
+var diapo1 = new Diaporama();
 diapo1.prevNext();
-diapo1.automatic();
