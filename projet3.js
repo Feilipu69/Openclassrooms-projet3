@@ -85,9 +85,9 @@ function Diaporama(){
 		figureElt.setAttribute("class", "mySlides");
 		var imgElt = document.createElement("img");
 		imgElt.setAttribute("src", src);
-		imgElt.setAttribute("alt", "vélo");
+		imgElt.setAttribute("alt", "image vélo");
 		figureElt.appendChild(imgElt);
-		document.querySelector(".slideshow-container").appendChild(figureElt);
+		document.querySelector(".slideshow-container").insertBefore(figureElt, document.querySelector(".prev"));
 	}
 }
 
