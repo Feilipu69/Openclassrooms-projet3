@@ -1,3 +1,6 @@
+body{
+	background-image: url(images/green004.jpg);
+}
 /* Slideshow container */
 .slideshow-container {
 	max-width: 1000px;
@@ -5,14 +8,32 @@
 	margin: auto;
 }
 
+h1 {
+	font-size: 50px;
+	color: white;
+	text-align: center;
+}
 /* Hide the images by default */
-.mySlides {
+.mySlides, .mySlides2 {
 	display: none;
 }
 
 /* images size */
 img {
 	width: 100%;
+}
+
+figure div {
+	width: 100%;
+	height: 228px;
+	margin: auto;
+	color: white;
+	text-align: center;
+	border: 2px solid gray;
+}
+
+h2 {
+	margin-top: 50px;
 }
 
 /* Next & previous buttons */
@@ -26,7 +47,8 @@ img {
 	color: white;
 	background-color: rgba(0, 0, 0, 0.2);
 	font-size: 18px;
-	border-radius: 0 3px 3px 0;
+	border-radius: 20px;
+	background: linear-gradient(#8EAFC5, #2b82ca);
 }
 
 .prev {
@@ -37,5 +59,51 @@ img {
 /* Position the "next button" to the right */
 .next {
 	right: 40px;
-	border-radius: 3px 0 0 3px;
+}
+
+.bouton {
+	width: 145px;
+	margin: auto;
+}
+
+.play, .stop {
+	width: 70px;
+	height: 25px;
+	border: 1px solid silver;
+	border-radius: 10px;
+	color: #0a5f66;
+	background-color: white;
+}
+
+#mapid {
+	width: 45%;
+	height: 350px;
+	margin-top: 30px;
+}
+
+#info {
+	width: 30%;
+	margin-top: 30px;
+	padding: 20px;
+	color: white;
+	border: 2px solid black;
+	border-radius: 10px;
+	display: none;
+}
+
+#mapAndInformations {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 30px;
+}
+
+#booking, #noBikes {
+	width: 45%;
+	border: 2px solid black;
+	border-radius: 10px;
+	margin-left: 70px;
+	margin-top: 30px;
+	padding: 20px;
+	color: white;
+	display: none;
 }
