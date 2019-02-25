@@ -32,6 +32,12 @@ figure div {
 	border: 2px solid gray;
 }
 
+figcaption{
+	color: white;
+	font-size: 1.5em;
+	text-align: center;
+}
+
 h2 {
 	margin-top: 50px;
 }
@@ -81,7 +87,7 @@ h2 {
 	margin-top: 30px;
 }
 
-#info {
+#data {
 	width: 30%;
 	margin-top: 30px;
 	padding: 20px;
