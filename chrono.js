@@ -1,7 +1,7 @@
 const Chrono = {
 	time: null,
 
-	init: function(minutes, secondes/*date*/){
+	init: function(minutes, secondes/* ajouter la date*/){
 		this.minutes = minutes;
 		this.secondes = secondes;
 		this.start();
@@ -40,19 +40,21 @@ const Chrono = {
 	},
 
 	start: function(){
-		$("#send").click(function(){
-		$("#min").text(this.minutes);
-		$("#sec").text(this.secondes);
-		this.reset(); /* le chrono n'est pas lancé donc pas d'arrêt et si je clique à nouveau alors que le chrono fonctionne, ça ne fait pas doublon */
-		$("#terminus").css("display", "none");
-		this.countDown(); // maintenant le chrono est lancé
-	}.bind(this));
+		//$("#send").click(function(){
+			$("#min").text(this.minutes);
+			$("#sec").text(this.secondes);
+			this.reset(); /* le chrono n'est pas lancé donc pas d'arrêt et si je clique à nouveau alors que le chrono fonctionne, ça ne fait pas doublon */
+			$("#terminus").css("display", "none");
+			this.countDown(); // maintenant le chrono est lancé
+		//}.bind(this));
 	},
 
 	reset: function(){
+		$("#send").click(function(){
 			clearInterval(this.time);
 			this.minutes;
 			this.secondes;
+		}.bind(this));
 	},
 
 	stop: function(){
