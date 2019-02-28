@@ -20,16 +20,26 @@ const Map = {
 		return nameStation.replace(/#\d+ *-/, "");
 	}, 
 
-	// Instanciation de l'objet permettant la réservation
+	// Instanciation de l'objet effectuant la réservation
 	booking(data){
 		let booking = Object.create(Booking);
 		booking.init($("#firstName").val(), $("#lastName").val(), data.name, data.available_bikes);
 	},
 
-	send(data){
-		$("#send").click(function(){
-			this.booking(data);
-		}.bind(this));
+	// Possibilité de réserver un vélo ou pas selon les vélos disponibles
+	availableBikes(data){
+		if(data.available_bikes === 0){
+			$("#resa").css("display", "none");
+			$("#noResa").css("display", "block");
+			$("#booking").css("display", "none");
+			$("#noResa").text("Désolé, il n'y pas de vélo disponible. Nous vous invitons à louer un vélo dans une autre station ou bien à revenir plus tard.");
+		} else {
+			$("#resa").css("display", "block");
+			$("#noResa").css("display", "none");
+			$("#send").click(function(){
+				this.booking(data);
+			}.bind(this));
+		}
 	},
 
 	// Markers datas
@@ -37,16 +47,16 @@ const Map = {
 	markersDatas(data, color){
 		L.marker(data.position, color).addTo(this.townMap).on("click", function(){
 			$("#data").css("display", "block");
-			$("#name").text(this.regex(data.name)); 
+			$("#name").text("Station : " + this.regex(data.name)); 
 			$("#status").text("statut : " + data.status);
-			$("#address").text("Adresse : " + data.address);
+			$("#address").text("Adresse : " + this.regex(data.address));
 			$("#place").text(data.bike_stands + " places.");
 			$("#dispo").text(data.available_bike_stands + " places disponibles.");
 			$("#velo").text(data.available_bikes + " vélos disponibles.");
 			$("#booking").css("display", "none");
 			$("#chronos").css("display", "none");
 
-			this.send(data);
+			this.availableBikes(data);
 		}.bind(this));
 	},
 
