@@ -14,7 +14,7 @@
 		<h1>Réservation de vélos</h1>
 		<!-- Slideshow container -->
 		<div class="slideshow-container">
-			<!-- blocs des images -->
+			<!--images blocks -->
 			<figure class="mySlides"> 
 				<img src="images/veloUn.jpeg" alt="image vélo" />
 				<figcaption>Bienvenue sur notre site de réservation de vélo</figcaption>
@@ -33,41 +33,40 @@
 			<a class="next"><i class="fas fa-bicycle"></i></a>
 		</div>
 
-		<div class="bouton">
+		<div class="playStopButton">
 			<button class="play">Play</button>
 			<button class="stop">Stop</button>
 		</div>
 
-		<div id="mapAndInformations">
+		<div id="mapAndData">
 			<div id="mapid"></div>
 			<div id="data">
 				<p id="name"></p>
 				<p id="status"></p>
 				<p id="address"></p>
 				<p id="place"></p>
-				<p id="dispo"></p>
-				<p id="velo"></p>
-				<div id="resa">
+				<p id="available"></p>
+				<p id="bike"></p>
+				<div id="identity">
 					<p><label>Nom </label><input id="lastName" /></p>
 					<p><label>Prénom </label><input id="firstName" /></p>
-					<p><button id="send">Réservation</button></p>
+					<p><button id="sendIdentity">Réservation</button></p>
 				</div>
-				<div id="noResa"></div>
+				<div id="noBike"></div>
 			</div>
 		</div>
 		<div id="booking">
 			<div id="addressAndName"></div>
-			<div id="chronos">Temps restant avant expiration de la réservation <span id="min"></span> min <span id="sec"></span> sec <button id="reset">Stop</button></div>
+			<div id="countdown">Temps restant avant expiration de la réservation <span id="min"></span> min <span id="sec"></span> sec</div>
 			<div id="terminus"></div>
 		</div>
-		<div id="noBikes"></div>
 
 		<script src="ajax.js"></script>
 		<script src="fichiers/jquery-3.3.1.js"></script>
 		<script src="slider.js"></script>
 		<script src="map.js"></script>
 		<script src="booking.js"></script>
-		<script src="chrono.js"></script>
+		<script src="countdown.js"></script>
 		<script src="main.js"></script>
 	</body>
 </html>
