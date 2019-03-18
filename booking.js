@@ -10,6 +10,6 @@ const Booking = {
 	displayBookingInformations(){
 		$("#booking").css("display", "block");
 		$("#bike").text((this.availableBikes - 1 ) + " vélo(s) disponible(s).");
-		$("#addressAndName").text("Vélo réservé à la station " + this.station/*.replace(/#\d+ *-/, "")*/ + " par " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));  
+		$("#addressAndName").text("Vélo réservé à la station " + this.station/*.replace(/#\d+ *-/, "") */+ " par " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));  
 	}
 }

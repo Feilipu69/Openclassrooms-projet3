@@ -9,8 +9,8 @@ const Map = {
 		this.lat = lat;
 		this.lng = lng;
 		this.zoom = zoom;
-		this.chargement();
 		this.displayMap();
+		this.chargement();
 	},
 
 	calculTemps(){
@@ -24,7 +24,7 @@ const Map = {
 
 	chargement(){
 		$(window).on("load", function(){
-			if(sessionStorage.getItem("temps")){ 
+			if(localStorage.getItem("lastName") && localStorage.getItem("firstName") && sessionStorage.getItem("temps")){ 
 				this.booking(data);
 				this.timer(this.calculTemps()[0], this.calculTemps()[1]);
 			}
