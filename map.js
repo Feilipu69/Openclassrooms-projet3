@@ -106,7 +106,7 @@ const Map = {
 	loadPage(){
 		if(localStorage.getItem("lastName") && localStorage.getItem("firstName") && sessionStorage.getItem("temps")){ 
 			this.booking(data);
-			this.timer(this.calculateTime()[0], this.calculTemps()[1]);
+			this.timer(this.calculateTime()[0], this.calculateTime()[1]);
 		}
 	},
 
