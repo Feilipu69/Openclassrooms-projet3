@@ -23,13 +23,13 @@ const Chrono = {
 			$("#sec").text(this.seconds);	
 			$("#min").text(this.minutes);
 
-			/*if(this.minutes < 10){
+			if(this.minutes < 10){
 				$("#min").text("0" + this.minutes);
 			}
 
 			if(this.seconds < 10){
 				$("#sec").text("0" + this.seconds);
-			}*/
+			}
 
 			if(this.minutes === 0 && this.seconds === 0){
 				clearInterval(this.time);

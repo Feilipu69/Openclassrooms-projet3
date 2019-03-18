@@ -10,27 +10,10 @@ const Map = {
 		this.lng = lng;
 		this.zoom = zoom;
 		this.displayMap();
-		this.chargement();
+		this.loadPage();
 	},
 
-	calculTemps(){
-		let time1 = sessionStorage.getItem("temps") / 1000;
-		let time2 = Date.now() / 1000;
-		let time3 = (Math.floor(1200 - (time2 - time1)));
-		let minutes = Math.floor(time3 / 60);
-		let seconds = (time3 - (minutes * 60));
-		return [minutes, seconds];
-	},
-
-	chargement(){
-		$(window).on("load", function(){
-			if(localStorage.getItem("lastName") && localStorage.getItem("firstName") && sessionStorage.getItem("temps")){ 
-				this.booking(data);
-				this.timer(this.calculTemps()[0], this.calculTemps()[1]);
-			}
-		}.bind(this));
-	},
-
+	// Affiche la carte et les marqueurs
 	displayMap(){
 		this.townMap = L.map("mapid").setView([this.lat, this.lng], this.zoom); // display the map
 
@@ -41,10 +24,10 @@ const Map = {
 			accessToken: 'pk.eyJ1IjoiZmVpbGlwdSIsImEiOiJjanBzMWZzNDAxN2k1NDlydGxlZDBxc3NpIn0.RlZuwwtK8np2fBxYn_HKAg'
 		}).addTo(this.townMap);
 
-		// display markers
 		this.markers();
 	},
 
+	// Données des stations de la ville et couleur des marqueurs
 	markers(){
 		ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=" + this.town + "&apiKey=1d19770d3b8d7e4e0b8de68d91b39e7badac5e5c", function(response){
 			let datas = JSON.parse(response);
@@ -58,10 +41,12 @@ const Map = {
 		}.bind(this));
 	},
 
+	// Supprime le nombre de la station
 	deleteTheStationNumber(nameStation){ 
 		return nameStation.replace(/#\d+ *-/, "");
 	}, 
 
+	// Ajout des marqueurs à la carte et affichage des informations lors du clique sur un marqueur
 	markersDatas(data, color){
 		L.marker(data.position, color).addTo(this.townMap).on("click", function(){
 			$("#data").css("display", "block");
@@ -74,9 +59,11 @@ const Map = {
 			$("#booking").css("display", "none");
 			$("#countdown").css("display", "none");
 			this.availableBikes(data);
+			this.sendBooking(data);
 		}.bind(this));
 	},
 
+	// Affiche une fenêtre selon le nombre de vélos disponibles
 	availableBikes(data){
 		if(data.available_bikes === 0){
 			$("#identity").css("display", "none");
@@ -86,22 +73,50 @@ const Map = {
 		} else {
 			$("#identity").css("display", "block");
 			$("#noBike").css("display", "none");
-			$("#sendIdentity").click(function(){
-				sessionStorage.setItem("temps", Date.now());
-				this.booking(data);
-				this.timer(20,0);
-			}.bind(this));
 		}
 	},
 
-	booking(data){
-		let booking = Object.create(Booking);
-		booking.init($("#firstName").val(), $("#lastName").val(), data.name, data.available_bikes);
+	// Evénement clic sur le bouton réservation 
+	sendBooking(data){
+		$("#sendIdentity").click(function(){
+			localStorage.setItem("firstName", $("#firstName").val());
+			localStorage.setItem("lastName", $("#lastName").val());
+			localStorage.setItem("lieu", data.name);
+			$("#bike").text((data.available_bikes - 1 ) + " vélo(s) disponible(s).");
+			sessionStorage.setItem("temps", Date.now());
+			this.booking();
+			this.timer(20,0);
+		}.bind(this));
 	},
 
+	// Affiche le bloc réservation avec les nom, prénom et la station
+	booking(){
+		$("#booking").css("display", "block");
+		$("#addressAndName").text("Vélo réservé à la station " + localStorage.getItem("lieu").replace(/#\d+ *-/, "") + " par " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));
+	},
+
+	// Affiche le compteur
 	timer(minutes, seconds){
 		let time = Object.create(Chrono);
 		time.init(minutes, seconds);
 		$("#countdown").css("display", "block");
+	},
+
+	// Bloc réservation et compteur si une réservation est en cours
+	loadPage(){
+		if(localStorage.getItem("lastName") && localStorage.getItem("firstName") && sessionStorage.getItem("temps")){ 
+			this.booking(data);
+			this.timer(this.calculateTime()[0], this.calculTemps()[1]);
+		}
+	},
+
+	// calcul du temps restant entre la réservation et le rafraichissement de la page
+	calculateTime(){
+		let time1 = sessionStorage.getItem("temps") / 1000;
+		let time2 = Date.now() / 1000;
+		let time3 = (Math.floor(1200 - (time2 - time1)));
+		let minutes = Math.floor(time3 / 60);
+		let seconds = (time3 - (minutes * 60));
+		return [minutes, seconds];
 	}
 };
