@@ -63,13 +63,20 @@ const Map = {
 		}.bind(this));
 	},
 
-	// Affiche une fenêtre selon le nombre de vélos disponibles
+	// Affiche un message si aucun vélo est disponible
+	// Le formulaire est prérempli si le nom et le prénom sont stockés
+	// Sinon affiche le formulaire.
 	availableBikes(data){
 		if(data.available_bikes === 0){
 			$("#identity").css("display", "none");
 			$("#noBike").css("display", "block");
 			$("#booking").css("display", "none");
 			$("#noBike").text("Il n'y pas de vélo disponible. Nous vous invitons à louer un vélo dans une autre station ou bien à revenir plus tard.");
+		} else if (localStorage.getItem("lastName") && localStorage.getItem("firstName")){
+			$("#lastName").val(localStorage.getItem("lastName"));
+			$("#firstName").val(localStorage.getItem("firstName"));
+			$("#identity").css("display", "block");
+			$("#noBike").css("display", "none");
 		} else {
 			$("#identity").css("display", "block");
 			$("#noBike").css("display", "none");
@@ -82,8 +89,9 @@ const Map = {
 			localStorage.setItem("firstName", $("#firstName").val());
 			localStorage.setItem("lastName", $("#lastName").val());
 			localStorage.setItem("lieu", data.name);
-			$("#bike").text((data.available_bikes - 1 ) + " vélo(s) disponible(s).");
 			sessionStorage.setItem("temps", Date.now());
+			sessionStorage.setItem("bike", 1);
+			$("#bike").text((data.available_bikes - 1 ) + " vélo(s) disponible(s).");
 			this.booking();
 			this.timer(20,0);
 		}.bind(this));
@@ -93,6 +101,16 @@ const Map = {
 	booking(){
 		$("#booking").css("display", "block");
 		$("#addressAndName").text("Vélo réservé à la station " + localStorage.getItem("lieu").replace(/#\d+ *-/, "") + " par " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));
+	},
+
+	// calcul du temps restant entre la réservation et le rafraichissement de la page
+	calculateTime(){
+		let time1 = sessionStorage.getItem("temps") / 1000;
+		let time2 = Date.now() / 1000;
+		let time3 = (Math.floor(1200 - (time2 - time1)));
+		let minutes = Math.floor(time3 / 60);
+		let seconds = (time3 - (minutes * 60));
+		return [minutes, seconds];
 	},
 
 	// Affiche le compteur
@@ -110,15 +128,5 @@ const Map = {
 			this.booking();
 			this.timer(this.calculateTime()[0], this.calculateTime()[1]);
 		}
-	},
-
-	// calcul du temps restant entre la réservation et le rafraichissement de la page
-	calculateTime(){
-		let time1 = sessionStorage.getItem("temps") / 1000;
-		let time2 = Date.now() / 1000;
-		let time3 = (Math.floor(1200 - (time2 - time1)));
-		let minutes = Math.floor(time3 / 60);
-		let seconds = (time3 - (minutes * 60));
-		return [minutes, seconds];
 	}
 };

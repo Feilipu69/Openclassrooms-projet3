@@ -35,8 +35,7 @@ const Chrono = {
 				clearInterval(this.time);
 				localStorage.clear();
 				sessionStorage.clear();
-				$("#countdown").css("display", "none");
-				$("#terminus").css("display", "block").text("Votre réservation a pris fin.");
+				$("#booking").css("display", "none");
 			}
 		}.bind(this), 1000);
 	},
