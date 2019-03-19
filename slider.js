@@ -39,7 +39,6 @@ var Slider = {
 		this.slide[this.slideIndex].style.display = "block";
 	},
 
-	// previous & next
 	previous: function(){
 		this.btnPrev.click(function(){
 			this.indexMinus();
@@ -64,7 +63,6 @@ var Slider = {
 		}.bind(this));
 	},
 
-	// automatic
 	automatic: function(){
 		this.showSlide();
 		this.timer = setInterval(function(){

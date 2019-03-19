@@ -15,7 +15,7 @@ const Map = {
 
 	// Affiche la carte et les marqueurs
 	displayMap(){
-		this.townMap = L.map("mapid").setView([this.lat, this.lng], this.zoom); // display the map
+		this.townMap = L.map("mapid").setView([this.lat, this.lng], this.zoom); 
 
 		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -105,7 +105,9 @@ const Map = {
 	// Bloc réservation et compteur si une réservation est en cours
 	loadPage(){
 		if(localStorage.getItem("lastName") && localStorage.getItem("firstName") && sessionStorage.getItem("temps")){ 
-			this.booking(data);
+			$("#booking").css("margin", "auto");
+			$("#booking").css("margin-top", "30px");
+			this.booking();
 			this.timer(this.calculateTime()[0], this.calculateTime()[1]);
 		}
 	},
