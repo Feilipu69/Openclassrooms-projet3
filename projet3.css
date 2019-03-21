@@ -32,7 +32,7 @@ figcaption{
 /* Next & previous buttons */
 .prev, .next {
 	position: absolute;
-	top: 50%;
+	top: 43%;
 	width: auto;
 	margin-top: -22px;
 	margin-left: 40px;

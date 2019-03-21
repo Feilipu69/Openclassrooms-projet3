@@ -1,5 +1,5 @@
 const Chrono = {
-	time: null,
+	timeId: null,
 
 	init: function(minutes, seconds){
 		this.minutes = minutes;
@@ -9,7 +9,7 @@ const Chrono = {
 	},
 
 	countDown: function(){
-		this.time = setInterval(function(){
+		this.timeId = setInterval(function(){
 			this.seconds -= 1;
 
 			if(this.seconds < 0){
@@ -32,8 +32,7 @@ const Chrono = {
 			}
 
 			if(this.minutes === 0 && this.seconds === 0){
-				clearInterval(this.time);
-				localStorage.clear();
+				clearInterval(this.timeId);
 				sessionStorage.clear();
 				$("#booking").css("display", "none");
 			}
@@ -51,7 +50,7 @@ const Chrono = {
 
 	reset: function(){ // a chaque clique sur le bouton reservation le compteur redémarre à 0
 		$("#sendIdentity").click(function(){
-			clearInterval(this.time);
+			clearInterval(this.timeId);
 			$("min").text(this.minutes);
 			$("sec").text(this.seconds);
 		}.bind(this));
@@ -59,8 +58,7 @@ const Chrono = {
 
 	stop: function(){
 		$("#cancel").click(function(){
-			clearInterval(this.time);
-			localStorage.clear();
+			clearInterval(this.timeId);
 			sessionStorage.clear();
 		}.bind(this));
 

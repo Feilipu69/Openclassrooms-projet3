@@ -64,8 +64,8 @@ const Map = {
 	},
 
 	// Affiche un message si aucun vélo est disponible
-	// Le formulaire est prérempli si le nom et le prénom sont stockés
-	// Sinon affiche le formulaire.
+	// Si le nom et le prénom sont stockés, le formulaire est prérempli 
+	// Sinon affiche le formulaire vierge.
 	availableBikes(data){
 		if(data.available_bikes === 0){
 			$("#identity").css("display", "none");
@@ -88,7 +88,7 @@ const Map = {
 		$("#sendIdentity").click(function(){
 			localStorage.setItem("firstName", $("#firstName").val());
 			localStorage.setItem("lastName", $("#lastName").val());
-			localStorage.setItem("lieu", data.name);
+			sessionStorage.setItem("lieu", data.name);
 			sessionStorage.setItem("temps", Date.now());
 			sessionStorage.setItem("bike", 1);
 			$("#bike").text((data.available_bikes - 1 ) + " vélo(s) disponible(s).");
@@ -100,7 +100,7 @@ const Map = {
 	// Affiche le bloc réservation avec les nom, prénom et la station
 	booking(){
 		$("#booking").css("display", "block");
-		$("#addressAndName").text("Vélo réservé à la station " + localStorage.getItem("lieu").replace(/#\d+ *-/, "") + " par " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));
+		$("#addressAndName").text("Vélo réservé à la station " + sessionStorage.getItem("lieu").replace(/#\d+ *-/, "") + " par " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));
 	},
 
 	// calcul du temps restant entre la réservation et le rafraichissement de la page
