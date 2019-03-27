@@ -43,7 +43,6 @@ const Chrono = {
 		$("#min").text(this.minutes);
 		$("#sec").text(this.seconds);
 		this.reset(); 
-		$("#terminus").css("display", "none");
 		$("#countdown").css("display", "block");
 		this.countDown(); // maintenant le chrono est lancé
 	},

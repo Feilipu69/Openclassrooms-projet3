@@ -98,6 +98,7 @@ const Map = {
 	booking(){
 		$("#booking").css("display", "block");
 		$("#addressAndName").text("Vélo réservé à la station " + sessionStorage.getItem("lieu").replace(/#\d+ *-/, "") + " par " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));
+		$("#countdown").css("display", "none");
 		$("#canvas").css("display", "block");
 	},
 
