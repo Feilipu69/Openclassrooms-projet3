@@ -11,6 +11,7 @@ const Map = {
 		this.zoom = zoom;
 		this.displayMap();
 		this.loadPage();
+		this.bookingOk();
 	},
 
 	// Affiche la carte et les marqueurs
@@ -56,21 +57,18 @@ const Map = {
 			$("#place").text(data.bike_stands + " places.");
 			$("#available").text(data.available_bike_stands + " places disponibles.");
 			$("#bike").text(data.available_bikes + " vélos disponibles.");
-			$("#booking").css("display", "none");
-			$("#countdown").css("display", "none");
 			this.availableBikes(data);
 			this.sendBooking(data);
 		}.bind(this));
 	},
 
-	// Affiche un message si aucun vélo est disponible
+	// Si aucun vélo n'est disponible affiche un message 
 	// Si le nom et le prénom sont stockés, le formulaire est prérempli 
 	// Sinon affiche le formulaire vierge.
 	availableBikes(data){
 		if(data.available_bikes === 0){
 			$("#identity").css("display", "none");
 			$("#noBike").css("display", "block");
-			$("#booking").css("display", "none");
 			$("#noBike").text("Il n'y pas de vélo disponible. Nous vous invitons à louer un vélo dans une autre station ou bien à revenir plus tard.");
 		} else if (localStorage.getItem("lastName") && localStorage.getItem("firstName")){
 			$("#lastName").val(localStorage.getItem("lastName"));
@@ -93,14 +91,14 @@ const Map = {
 			sessionStorage.setItem("bike", 1);
 			$("#bike").text((data.available_bikes - 1 ) + " vélo(s) disponible(s).");
 			this.booking();
-			this.timer(20,0);
 		}.bind(this));
 	},
 
-	// Affiche le bloc réservation avec les nom, prénom et la station
+	// Affiche le bloc réservation avec les nom, prénom et la station et le canvas
 	booking(){
 		$("#booking").css("display", "block");
 		$("#addressAndName").text("Vélo réservé à la station " + sessionStorage.getItem("lieu").replace(/#\d+ *-/, "") + " par " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));
+		$("#canvas").css("display", "block");
 	},
 
 	// calcul du temps restant entre la réservation et le rafraichissement de la page
@@ -120,11 +118,19 @@ const Map = {
 		$("#countdown").css("display", "block");
 	},
 
+	// Validation de la réservation
+	bookingOk(){
+		$("#validation").on("click", function(){
+			this.timer(20, 0);
+		}.bind(this));
+	},
+	
 	// Bloc réservation et compteur si une réservation est en cours
 	loadPage(){
 		if(localStorage.getItem("lastName") && localStorage.getItem("firstName") && sessionStorage.getItem("temps")){ 
 			$("#booking").css("margin", "auto");
 			$("#booking").css("margin-top", "30px");
+			$("#signature").css("display", "none");
 			this.booking();
 			this.timer(this.calculateTime()[0], this.calculateTime()[1]);
 		}

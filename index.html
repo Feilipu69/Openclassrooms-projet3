@@ -55,17 +55,24 @@
 				<div id="noBike"></div>
 			</div>
 		</div>
-		<div id="booking">
-			<div id="addressAndName"></div>
-			<div id="countdown">Temps restant avant expiration de la réservation <span id="min"></span> min <span id="sec"></span> sec <br />
-				<button id="cancel">Annulation</button></div>
+		<div id="bookingSignature">
+			<div id="booking">
+				<div id="addressAndName"></div>
+				<div id="countdown">Temps restant avant expiration de la réservation <span id="min"></span> min <span id="sec"></span> sec <br />
+					<button id="validation">Validation</button><button id="cancel">Annulation</button></div>
+			</div>
+			<div id="signature">
+				<canvas id="canvas" width="320" height="160">
+					Votre navigateur ne supporte pas cet élément
+				</canvas>
+			</div>
 		</div>
-		<div id="canvas"></div>
 
 		<script src="ajax.js"></script>
 		<script src="fichiers/jquery-3.3.1.js"></script>
 		<script src="slider.js"></script>
 		<script src="map.js"></script>
+		<script src="signature.js"></script>
 		<script src="countdown.js"></script>
 		<script src="main.js"></script>
 	</body>
