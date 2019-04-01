@@ -8,4 +8,4 @@ nantes.init("nantes", 47.217, -1.553, 12);
 
 // signature
 let sign = Object.create(Signature);
-sign.init(document.getElementById("canvas"), "2d", "white", 2);
+sign.init(document.getElementById("canvas"), "white", 2);

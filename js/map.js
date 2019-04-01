@@ -11,8 +11,12 @@ const Map = {
 		this.zoom = zoom;
 		this.displayMap();
 		this.loadPage();
-		this.bookingOk();
 	},
+	
+	// Regex pour supprimer le numéro de la station
+	deleteTheStationNumber(nameStation){ 
+		return nameStation.replace(/#\d+ *-/, "");
+	}, 
 
 	// Affiche la carte et les marqueurs
 	displayMap(){
@@ -28,7 +32,19 @@ const Map = {
 		this.markers();
 	},
 
-	// Données des stations de la ville et couleur des marqueurs
+	// SI une réservation est en cours affiche le bloc réservation et le compteur
+	loadPage(){
+		if(sessionStorage.getItem("clock")){ 
+			$("#booking").css("display", "block");
+			$("#booking").css("margin", "auto");
+			$("#booking").css("margin-top", "30px");
+			$("#addressAndName").text("Vélo réservé à la station " + sessionStorage.getItem("place").replace(/#\d+ *-/, "") + " par " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));
+			$("#validation").css("display", "none");
+			Chrono.init(this.calculateTime()[0], this.calculateTime()[1]);
+		}
+	},
+
+	// Accès aux données des stations et affiche les marqueurs bleus et rouges.
 	markers(){
 		ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=" + this.town + "&apiKey=1d19770d3b8d7e4e0b8de68d91b39e7badac5e5c", function(response){
 			let datas = JSON.parse(response);
@@ -42,14 +58,12 @@ const Map = {
 		}.bind(this));
 	},
 
-	// Supprime le nombre de la station
-	deleteTheStationNumber(nameStation){ 
-		return nameStation.replace(/#\d+ *-/, "");
-	}, 
-
-	// Ajout des marqueurs à la carte et affichage des informations lors du clique sur un marqueur
+	
+	// CLIC SUR UN MARQUEUR affiche les informations et vide le sessionStorage
 	markersDatas(data, color){
 		L.marker(data.position, color).addTo(this.townMap).on("click", function(){
+			sessionStorage.clear(); // initialise sessionStorage
+			sign.context.clearRect(0, 0, sign.canvas.width, sign.canvas.height); // initialise le canvas
 			$("#data").css("display", "block");
 			$("#name").text("Station : " + this.deleteTheStationNumber(data.name)); 
 			$("#status").text("statut : " + data.status);
@@ -57,8 +71,10 @@ const Map = {
 			$("#place").text(data.bike_stands + " places.");
 			$("#available").text(data.available_bike_stands + " places disponibles.");
 			$("#bike").text(data.available_bikes + " vélos disponibles.");
+			$("#bookingSignature").css("display", "none");
 			this.availableBikes(data);
-			this.sendBooking(data);
+			this.bookingData(data);
+			this.bookingOk(data);
 		}.bind(this));
 	},
 
@@ -68,6 +84,8 @@ const Map = {
 	availableBikes(data){
 		if(data.available_bikes === 0){
 			$("#identity").css("display", "none");
+			$("#booking").css("display", "none");
+			$("#canvas").css("display", "none");
 			$("#noBike").css("display", "block");
 			$("#noBike").text("Il n'y pas de vélo disponible. Nous vous invitons à louer un vélo dans une autre station ou bien à revenir plus tard.");
 		} else if (localStorage.getItem("lastName") && localStorage.getItem("firstName")){
@@ -81,59 +99,43 @@ const Map = {
 		}
 	},
 
-	// Evénement clic sur le bouton réservation 
-	sendBooking(data){
-		$("#sendIdentity").click(function(){
-			localStorage.setItem("firstName", $("#firstName").val());
-			localStorage.setItem("lastName", $("#lastName").val());
-			sessionStorage.setItem("lieu", data.name);
-			sessionStorage.setItem("temps", Date.now());
-			sessionStorage.setItem("bike", 1);
-			$("#bike").text((data.available_bikes - 1 ) + " vélo(s) disponible(s).");
-			this.booking();
+	// CLIC SUR BOUTON RESERVATION : affiche les informations pour une réservation : nom, prenom, station et bloc signature 
+	bookingData(data){
+		$("#bookingData").click(function(){
+			$("#bookingSignature").css("display", "flex");
+			$("#booking").css("display", "flex");
+			$("#addressAndName").text("Vélo réservé à la station " + data.name.replace(/#\d+ *-/, "") + " par " + $("#firstName").val() + " " + $("#lastName").val());
+			$("#countdown").css("display", "none");
+			$("#validation").css("display", "inline");
+			$("#canvas").css("display", "block");
+			sign.emptyRect(); // stockage de l'image du canvas vide
 		}.bind(this));
 	},
-
-	// Affiche le bloc réservation avec les nom, prénom et la station et le canvas
-	booking(){
-		$("#booking").css("display", "block");
-		$("#addressAndName").text("Vélo réservé à la station " + sessionStorage.getItem("lieu").replace(/#\d+ *-/, "") + " par " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));
-		$("#countdown").css("display", "none");
-		$("#canvas").css("display", "block");
+	
+	// Validation de la réservation
+	bookingOk(data){
+		$("#validation").on("click", function(){
+			if(sessionStorage.getItem("emptyCanvas") === document.getElementById("canvas").toDataURL()){
+				sign.noSignature();
+			} else {
+				localStorage.setItem("firstName", $("#firstName").val());
+				localStorage.setItem("lastName", $("#lastName").val());
+				sessionStorage.setItem("place", data.name);
+				sessionStorage.setItem("clock", Date.now());
+				$("#bike").text((data.available_bikes - 1) + " vélo(s) disponible(s).");
+				$("#countdown").css("display", "block");
+				Chrono.init(20, 0);
+			}
+		}.bind(this));
 	},
-
+	
 	// calcul du temps restant entre la réservation et le rafraichissement de la page
 	calculateTime(){
-		let time1 = sessionStorage.getItem("temps") / 1000;
+		let time1 = sessionStorage.getItem("clock") / 1000;
 		let time2 = Date.now() / 1000;
 		let time3 = (Math.floor(1200 - (time2 - time1)));
 		let minutes = Math.floor(time3 / 60);
 		let seconds = (time3 - (minutes * 60));
 		return [minutes, seconds];
-	},
-
-	// Affiche le compteur
-	timer(minutes, seconds){
-		let time = Object.create(Chrono);
-		time.init(minutes, seconds);
-		$("#countdown").css("display", "block");
-	},
-
-	// Validation de la réservation
-	bookingOk(){
-		$("#validation").on("click", function(){
-			this.timer(20, 0);
-		}.bind(this));
-	},
-	
-	// Bloc réservation et compteur si une réservation est en cours
-	loadPage(){
-		if(localStorage.getItem("lastName") && localStorage.getItem("firstName") && sessionStorage.getItem("temps")){ 
-			$("#booking").css("margin", "auto");
-			$("#booking").css("margin-top", "30px");
-			$("#signature").css("display", "none");
-			this.booking();
-			this.timer(this.calculateTime()[0], this.calculateTime()[1]);
-		}
 	}
 };

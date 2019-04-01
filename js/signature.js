@@ -3,15 +3,14 @@ const Signature = {
 	mousePos: {x: 0, y: 0},
 	lastPos: this.mousePos,
 
-	init(canvas, ctx, color, line){
+	init(canvas, color, line){
 		this.canvas = canvas;
-		this.context = this.canvas.getContext(ctx);
+		this.context = this.canvas.getContext("2d");
 		this.context.strokeStyle = color;
 		this.context.lineWidth = line;
 		this.mouseDown();
 		this.mouseUp();
 		this.mouseMove();
-		this.cancelSignature();
 	},
 
 	// Evénement clic bouton de la souris
@@ -57,11 +56,18 @@ const Signature = {
 		}
 	},
 
-	// Annulation de la signature
-	cancelSignature(){
-		$("#cancel").click(function(){
-			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		}.bind(this));
+	emptyRect(){
+		let empty = document.getElementById("canvas").toDataURL();
+		sessionStorage.setItem("emptyCanvas", empty);
+	},
 
+	// Message si pas de signature
+	noSignature(){
+		this.context.font = "25px Arial";
+		this.context.fillStyle = "red";
+		this.context.fillText("Vous avez oublié de signer.", 7, 80);
+		setTimeout(function(){
+			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		}.bind(this), 2000);
 	}
 };

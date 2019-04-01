@@ -1,14 +1,16 @@
 const Chrono = {
 	timeId: null,
+	text: "hello",
 
 	init: function(minutes, seconds){
 		this.minutes = minutes;
 		this.seconds = seconds;
 		this.start();
-		this.stop();
+		//this.stop();
+		this.reset();
 	},
 
-	countDown: function(){
+	countDown(){
 		this.timeId = setInterval(function(){
 			this.seconds -= 1;
 
@@ -39,27 +41,37 @@ const Chrono = {
 		}.bind(this), 1000);
 	},
 
-	start: function(){
+	start(){
 		$("#min").text(this.minutes);
 		$("#sec").text(this.seconds);
-		this.reset(); 
+		this.reStart();
 		$("#countdown").css("display", "block");
 		this.countDown(); // maintenant le chrono est lancé
 	},
 
-	reset: function(){ // a chaque clique sur le bouton reservation le compteur redémarre à 0
-		$("#sendIdentity").click(function(){
+	reStart(){
+		$("#validation").click(function(){
 			clearInterval(this.timeId);
 			$("min").text(this.minutes);
 			$("sec").text(this.seconds);
 		}.bind(this));
 	},
 
-	stop: function(){
+	reset(){ // a chaque clique sur le bouton validation le compteur redémarre à 0
+		$("#cancel").click(function(){
+			clearInterval(this.timeId);
+			$("min").text(this.minutes);
+			$("sec").text(this.seconds);
+			sessionStorage.clear();
+			$("#countdown").css("display", "none");
+		}.bind(this));
+	}
+
+	/*stop(){
 		$("#cancel").click(function(){
 			clearInterval(this.timeId);
 			sessionStorage.clear();
+			$("#countdown").css("display", "none");
 		}.bind(this));
-
-	},
+	}*/
 };

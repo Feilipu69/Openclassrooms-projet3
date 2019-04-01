@@ -1,5 +1,5 @@
 body{
-	background-image: url(images/green004.jpg);
+	background-image: url(../images/green004.jpg);
 }
 /* Slideshow container */
 .slideshow-container {
@@ -95,10 +95,11 @@ figcaption{
 	border: 2px solid black;
 	border-radius: 10px;
 	margin-left: 70px;
-	margin-top: 30px;
 	padding: 20px;
 	color: white;
 	display: none;
+	flex-direction: column;
+	justify-content: space-around;
 }
 
 #noBike {
