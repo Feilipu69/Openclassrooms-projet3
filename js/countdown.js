@@ -1,13 +1,10 @@
 const Chrono = {
 	timeId: null,
-	text: "hello",
 
 	init: function(minutes, seconds){
 		this.minutes = minutes;
 		this.seconds = seconds;
 		this.start();
-		//this.stop();
-		this.reset();
 	},
 
 	countDown(){
@@ -36,7 +33,7 @@ const Chrono = {
 			if(this.minutes === 0 && this.seconds === 0){
 				clearInterval(this.timeId);
 				sessionStorage.clear();
-				$("#booking").css("display", "none");
+				$("#bookingSignature").css("display", "none");
 			}
 		}.bind(this), 1000);
 	},
@@ -50,28 +47,10 @@ const Chrono = {
 	},
 
 	reStart(){
-		$("#validation").click(function(){
+		$("#booking").click(function(){
 			clearInterval(this.timeId);
 			$("min").text(this.minutes);
 			$("sec").text(this.seconds);
-		}.bind(this));
-	},
-
-	reset(){ // a chaque clique sur le bouton validation le compteur redémarre à 0
-		$("#cancel").click(function(){
-			clearInterval(this.timeId);
-			$("min").text(this.minutes);
-			$("sec").text(this.seconds);
-			sessionStorage.clear();
-			$("#countdown").css("display", "none");
 		}.bind(this));
 	}
-
-	/*stop(){
-		$("#cancel").click(function(){
-			clearInterval(this.timeId);
-			sessionStorage.clear();
-			$("#countdown").css("display", "none");
-		}.bind(this));
-	}*/
 };
