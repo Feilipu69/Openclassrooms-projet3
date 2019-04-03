@@ -1,7 +1,7 @@
 body{
 	background-image: url(../images/green004.jpg);
 }
-/* Slideshow container */
+/* Diaporama */
 .slideshow-container {
 	max-width: 1000px;
 	position: relative;
@@ -13,32 +13,34 @@ h1 {
 	color: white;
 	text-align: center;
 }
-/* Hide the images by default */
+/* Cache les images par défaut */
 .mySlides {
 	display: none;
 }
 
-/* images size */
-img {
+/* Taille des images */
+.mySlides img {
 	width: 100%;
+	border: 2px solid white;
+	border-radius: 10px;
 }
 
+/* Phrases explicatives */
 figcaption{
 	color: white;
 	font-size: 1.5em;
 	text-align: center;
 }
 
-/* Next & previous buttons */
+/* Boutons avant et après */
 .prev, .next {
 	position: absolute;
-	top: 43%;
+	top: 45%;
 	width: auto;
 	margin-top: -22px;
-	margin-left: 40px;
+	margin-left: 44px;
 	padding: 10px;
 	color: white;
-	background-color: rgba(0, 0, 0, 0.2);
 	font-size: 18px;
 	border-radius: 20px;
 	background: linear-gradient(#8EAFC5, #2b82ca);
@@ -49,11 +51,11 @@ figcaption{
 	-webkit-transform: rotateY(180deg);
 }
 
-/* Position the "next button" to the right */
 .next {
 	right: 40px;
 }
 
+/* Boutons play et stop */
 .playStopButton {
 	width: 145px;
 	margin: auto;
@@ -68,12 +70,21 @@ figcaption{
 	background-color: white;
 }
 
+/* Bloc conteneur de mapid et data ci dessous */
+#mapAndData {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 30px;
+}
+
+/* Carte */
 #mapid {
 	width: 45%;
 	height: 350px;
 	margin-top: 30px;
 }
 
+/* Bloc informations sur l'état de la station et formulaire */
 #data {
 	width: 30%;
 	margin-top: 30px;
@@ -84,10 +95,18 @@ figcaption{
 	display: none;
 }
 
-#mapAndData {
+/* Si il n'y a pas de vélo disponible */
+#noBike {
+	background-color: red;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+/* Bloc conteneur de bookingData et canvas ci-dessous */
+#bookingSignature {
 	display: flex;
-	justify-content: space-around;
-	margin-top: 30px;
+	justify-content: space-between;
+	margin-top: 10px;
 }
 
 #bookingData {
@@ -102,24 +121,8 @@ figcaption{
 	justify-content: space-around;
 }
 
-#noBike {
-	background-color: red;
-	border-radius: 10px;
-	padding: 10px;
-}
-
-#bookingSignature {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 10px;
-}
-
 #addressAndName {
 	font-size: 1.3em;
-}
-
-#signature {
-	display: flex;
 }
 
 #canvas {
@@ -128,4 +131,45 @@ figcaption{
 	border: 2px solid black;
 	border-radius: 10px;
 	background: linear-gradient(#8EAFC5, #2b82ca);
+}
+
+@media screen and (max-width: 768px)
+{
+	.prev, .next {
+		top: 30%;
+		margin-left: 0;
+		background: none;
+	}
+
+	.next {
+		right: -4px;
+	}
+
+	#mapAndData {
+		flex-direction: column;
+	}
+
+	#mapid, #data, #bookingData {
+		width: 100%;
+		padding: 0;
+	}
+
+	#bookingSignature {
+		flex-direction: column;
+	}
+
+	#bookingData {
+		margin-left: 0;
+	}
+
+	#addressAndName {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	#canvas {
+		width: 50%;
+		margin: auto;
+		margin-top: 10px;
+	}
 }

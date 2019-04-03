@@ -12,7 +12,6 @@ const Map = {
 		this.displayMap();
 		this.bookingOk();
 		this.loadPage();
-		this.chrono = Chrono.init(20, 0);
 	},
 	
 	// Regex pour supprimer le numéro de la station
@@ -37,11 +36,9 @@ const Map = {
 	// SI une réservation est en cours affiche le bloc réservation et le compteur
 	loadPage(){
 		if(sessionStorage.getItem("clock")){ 
-			$("#bookingData").css("display", "block");
-			//$("#bookingData").css("margin", "auto");
-			//$("#bookingData").css("margin-top", "30px");
+			$("#bookingData").css("display", "flex");
 			$("#addressAndName").text("Un vélo réservé à la station " + sessionStorage.getItem("station") + " pour " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));
-			Chrono.init(this.calculateTime()[0], this.calculateTime()[1]);
+			Chrono.init(Chrono.calculateTime()[0], Chrono.calculateTime()[1]);
 		}
 	},
 
@@ -76,7 +73,6 @@ const Map = {
 			$("#bike").text(data.available_bikes + " vélos disponibles.");
 			$("#bookingSignature").css("display", "none");
 			this.availableBikes(data);
-			//this.bookingOk();
 		}.bind(this));
 	},
 
@@ -129,14 +125,4 @@ const Map = {
 			}
 		}.bind(this));
 	},
-	
-	// calcul du temps restant entre la réservation et le rafraichissement de la page
-	calculateTime(){
-		let time1 = sessionStorage.getItem("clock") / 1000;
-		let time2 = Date.now() / 1000;
-		let time3 = (Math.floor(1200 - (time2 - time1)));
-		let minutes = Math.floor(time3 / 60);
-		let seconds = (time3 - (minutes * 60));
-		return [minutes, seconds];
-	}
 };
