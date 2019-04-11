@@ -10,8 +10,11 @@ const Map = {
 		this.lng = lng;
 		this.zoom = zoom;
 		this.loadPage();
+<<<<<<< HEAD
 		this.displayMap();
 		Booking.bookingOk();
+=======
+>>>>>>> d343a08cd2c202f841028f61df8619cd63bf1ccd
 	},
 	
 	// Regex pour supprimer le numéro de la station
@@ -37,7 +40,10 @@ const Map = {
 	loadPage(){
 		if(sessionStorage.getItem("clock")){ 
 			$("#bookingData").css("display", "flex");
+<<<<<<< HEAD
 			$("#bookingData").css("margin-top", "30px");
+=======
+>>>>>>> d343a08cd2c202f841028f61df8619cd63bf1ccd
 			$("#addressAndName").text("Un vélo réservé à la station " + sessionStorage.getItem("station") + " pour " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));
 			Chrono.init(Chrono.calculateTime()[0], Chrono.calculateTime()[1]);
 		}
@@ -98,5 +104,36 @@ const Map = {
 			$("#noBike").css("display", "none");
 			Booking.signature();
 		}
+<<<<<<< HEAD
 	}
+=======
+	},
+
+	// Affiche les données pour une réservation
+	bookingData(){
+		$("#bookingSignature").css("display", "flex");
+		$("#bookingData").css("display", "flex");
+		$("#addressAndName").text("Un vélo demandé à la station " + sessionStorage.getItem("station") + " par " + $("#firstName").val() + " " + $("#lastName").val());
+		$("#countdown").css("display", "none");
+		$("#canvas").css("display", "block");
+		sign.emptyRect(); // stockage de l'image du canvas vide
+	},
+	
+	// Validation de la réservation
+	bookingOk(){
+		$("#booking").on("click", function(){
+			if(sessionStorage.getItem("emptyCanvas") === document.getElementById("canvas").toDataURL()){
+				sign.noSignature();
+			} else {
+				localStorage.setItem("firstName", $("#firstName").val());
+				localStorage.setItem("lastName", $("#lastName").val());
+				sessionStorage.setItem("clock", Date.now());
+				$("#bike").text((sessionStorage.getItem("bikes") - 1) + " vélo(s) disponible(s).");
+				$("#addressAndName").text("Un vélo est reservé à la station " + sessionStorage.getItem("station") + " pour " + $("#firstName").val() + " " + $("#lastName").val());
+				$("#countdown").css("display", "block");
+				Chrono.init(20, 0);
+			}
+		}.bind(this));
+	},
+>>>>>>> d343a08cd2c202f841028f61df8619cd63bf1ccd
 };

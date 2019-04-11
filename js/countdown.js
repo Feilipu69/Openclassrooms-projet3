@@ -46,7 +46,19 @@ const Chrono = {
 		$("#countdown").css("display", "block");
 		this.countDown(); 
 	},
+<<<<<<< HEAD
 	
+=======
+
+	reStart(){
+		$("#booking").click(function(){
+			clearInterval(this.timeId);
+			$("min").text(this.minutes);
+			$("sec").text(this.seconds);
+		}.bind(this));
+	},
+
+>>>>>>> d343a08cd2c202f841028f61df8619cd63bf1ccd
 	calculateTime(){
 		let time1 = sessionStorage.getItem("clock") / 1000;
 		let time2 = Date.now() / 1000;
