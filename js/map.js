@@ -9,10 +9,9 @@ const Map = {
 		this.lat = lat;
 		this.lng = lng;
 		this.zoom = zoom;
-		this.displayMap();
-		this.bookingOk();
 		this.loadPage();
-		this.chrono = Chrono.init(20, 0);
+		this.displayMap();
+		Booking.bookingOk();
 	},
 	
 	// Regex pour supprimer le numéro de la station
@@ -37,11 +36,10 @@ const Map = {
 	// SI une réservation est en cours affiche le bloc réservation et le compteur
 	loadPage(){
 		if(sessionStorage.getItem("clock")){ 
-			$("#bookingData").css("display", "block");
-			//$("#bookingData").css("margin", "auto");
-			//$("#bookingData").css("margin-top", "30px");
+			$("#bookingData").css("display", "flex");
+			$("#bookingData").css("margin-top", "30px");
 			$("#addressAndName").text("Un vélo réservé à la station " + sessionStorage.getItem("station") + " pour " + localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"));
-			Chrono.init(this.calculateTime()[0], this.calculateTime()[1]);
+			Chrono.init(Chrono.calculateTime()[0], Chrono.calculateTime()[1]);
 		}
 	},
 
@@ -74,9 +72,8 @@ const Map = {
 			$("#place").text(data.bike_stands + " places.");
 			$("#available").text(data.available_bike_stands + " places disponibles.");
 			$("#bike").text(data.available_bikes + " vélos disponibles.");
-			$("#bookingSignature").css("display", "none");
+			$("#bookingData").css("display", "none");
 			this.availableBikes(data);
-			//this.bookingOk();
 		}.bind(this));
 	},
 
@@ -94,49 +91,12 @@ const Map = {
 			$("#lastName").val(localStorage.getItem("lastName"));
 			$("#firstName").val(localStorage.getItem("firstName"));
 			$("#identity").css("display", "block");
+			Booking.signature();
 			$("#noBike").css("display", "none");
-			this.bookingData();
 		} else {
 			$("#identity").css("display", "block");
 			$("#noBike").css("display", "none");
-			this.bookingData();
+			Booking.signature();
 		}
-	},
-
-	// Affiche les données pour une réservation
-	bookingData(){
-		$("#bookingSignature").css("display", "flex");
-		$("#bookingData").css("display", "flex");
-		$("#addressAndName").text("Un vélo demandé à la station " + sessionStorage.getItem("station") + " par " + $("#firstName").val() + " " + $("#lastName").val());
-		$("#countdown").css("display", "none");
-		$("#canvas").css("display", "block");
-		sign.emptyRect(); // stockage de l'image du canvas vide
-	},
-	
-	// Validation de la réservation
-	bookingOk(){
-		$("#booking").on("click", function(){
-			if(sessionStorage.getItem("emptyCanvas") === document.getElementById("canvas").toDataURL()){
-				sign.noSignature();
-			} else {
-				localStorage.setItem("firstName", $("#firstName").val());
-				localStorage.setItem("lastName", $("#lastName").val());
-				sessionStorage.setItem("clock", Date.now());
-				$("#bike").text((sessionStorage.getItem("bikes") - 1) + " vélo(s) disponible(s).");
-				$("#addressAndName").text("Un vélo est reservé à la station " + sessionStorage.getItem("station") + " pour " + $("#firstName").val() + " " + $("#lastName").val());
-				$("#countdown").css("display", "block");
-				Chrono.init(20, 0);
-			}
-		}.bind(this));
-	},
-	
-	// calcul du temps restant entre la réservation et le rafraichissement de la page
-	calculateTime(){
-		let time1 = sessionStorage.getItem("clock") / 1000;
-		let time2 = Date.now() / 1000;
-		let time3 = (Math.floor(1200 - (time2 - time1)));
-		let minutes = Math.floor(time3 / 60);
-		let seconds = (time3 - (minutes * 60));
-		return [minutes, seconds];
 	}
 };

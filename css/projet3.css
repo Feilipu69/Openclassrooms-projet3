@@ -1,7 +1,7 @@
 body{
 	background-image: url(../images/green004.jpg);
 }
-/* Slideshow container */
+/* Diaporama */
 .slideshow-container {
 	max-width: 1000px;
 	position: relative;
@@ -13,32 +13,35 @@ h1 {
 	color: white;
 	text-align: center;
 }
-/* Hide the images by default */
+/* Cache les images par défaut */
 .mySlides {
 	display: none;
 }
 
-/* images size */
-img {
-	width: 100%;
+/* Taille des images */
+.mySlides img {
+	width: 80%;
+	margin-left: 95px;
+	border: 2px solid white;
+	border-radius: 10px;
 }
 
+/* Phrases explicatives */
 figcaption{
 	color: white;
 	font-size: 1.5em;
 	text-align: center;
 }
 
-/* Next & previous buttons */
+/* Boutons avant et après */
 .prev, .next {
 	position: absolute;
-	top: 43%;
+	top: 45%;
 	width: auto;
 	margin-top: -22px;
-	margin-left: 40px;
+	margin-left: 44px;
 	padding: 10px;
 	color: white;
-	background-color: rgba(0, 0, 0, 0.2);
 	font-size: 18px;
 	border-radius: 20px;
 	background: linear-gradient(#8EAFC5, #2b82ca);
@@ -49,11 +52,11 @@ figcaption{
 	-webkit-transform: rotateY(180deg);
 }
 
-/* Position the "next button" to the right */
 .next {
 	right: 40px;
 }
 
+/* Boutons play et stop */
 .playStopButton {
 	width: 145px;
 	margin: auto;
@@ -68,58 +71,59 @@ figcaption{
 	background-color: white;
 }
 
-#mapid {
-	width: 45%;
-	height: 350px;
-	margin-top: 30px;
-}
-
-#data {
-	width: 30%;
-	margin-top: 30px;
-	padding: 20px;
-	color: white;
-	border: 2px solid black;
-	border-radius: 10px;
-	display: none;
-}
-
+/* Bloc conteneur de mapid et data ci dessous */
 #mapAndData {
 	display: flex;
 	justify-content: space-around;
 	margin-top: 30px;
 }
 
-#bookingData {
-	width: 42%;
-	border: 2px solid black;
-	border-radius: 10px;
-	margin-left: 70px;
-	padding: 20px;
-	color: white;
-	display: none;
+#mapAndBooking{
+	width: 70%;
+	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
 }
 
+/* Carte */
+#mapid {
+	width: 70%;
+	height: 350px;
+	margin: auto;
+}
+
+/* Bloc informations sur l'état de la station et formulaire */
+#data {
+	margin-right: 30px;
+	padding: 20px;
+	color: white;
+	border: 2px solid black;
+	border-radius: 10px;
+	display: none;
+}
+
+/* Si il n'y a pas de vélo disponible */
 #noBike {
 	background-color: red;
 	border-radius: 10px;
 	padding: 10px;
 }
 
-#bookingSignature {
-	display: flex;
-	justify-content: space-between;
+#bookingData {
+	width: 50%;
+	border: 2px solid black;
+	border-radius: 10px;
+	padding: 20px;
+	color: white;
+	display: none;
+	flex-direction: column;
+	justify-content: space-around;
+	margin: auto;
 	margin-top: 10px;
+	text-align: center;
 }
 
 #addressAndName {
 	font-size: 1.3em;
-}
-
-#signature {
-	display: flex;
 }
 
 #canvas {
@@ -128,4 +132,58 @@ figcaption{
 	border: 2px solid black;
 	border-radius: 10px;
 	background: linear-gradient(#8EAFC5, #2b82ca);
+}
+
+#booking, input {
+	height: 30px;
+}
+
+@media screen and (max-width: 1024px)
+{
+	.mySlides img {
+		width: 100%;
+		margin: auto;
+	}
+
+	.prev, .next {
+		top: 30%;
+		margin-left: 0;
+		background: none;
+	}
+
+	.next {
+		right: -4px;
+	}
+
+	#mapAndBooking {
+		width: 100%;
+	}
+
+	#mapAndData {
+		flex-direction: column;
+	}
+
+	#mapid, #data, #bookingData {
+		width: 90%;
+		margin: auto;
+		box-sizing: border-box;
+		margin-top: 10px;
+		padding: 15px;
+	}
+
+	#canvas {
+		width: 100%;
+		margin: auto;
+		margin-top: 10px;
+	}
+}
+
+@media screen and (min-width: 640px){
+	#canvas {
+		width: 60%;
+	}
+
+	.prev, .next {
+		top: 45%;
+	}
 }
