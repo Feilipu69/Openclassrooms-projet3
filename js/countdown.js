@@ -1,10 +1,11 @@
 const Chrono = {
 	timeId: null,
 
-	init: function(minutes, seconds){
+	init(minutes, seconds){
 		this.minutes = minutes;
 		this.seconds = seconds;
 		this.start();
+		this.calculateTime();
 	},
 
 	countDown(){
@@ -41,16 +42,17 @@ const Chrono = {
 	start(){
 		$("#min").text(this.minutes);
 		$("#sec").text(this.seconds);
-		this.reStart();
+		clearInterval(this.timeId);
 		$("#countdown").css("display", "block");
-		this.countDown(); // maintenant le chrono est lancé
+		this.countDown(); 
 	},
-
-	reStart(){
-		$("#booking").click(function(){
-			clearInterval(this.timeId);
-			$("min").text(this.minutes);
-			$("sec").text(this.seconds);
-		}.bind(this));
+	
+	calculateTime(){
+		let time1 = sessionStorage.getItem("clock") / 1000;
+		let time2 = Date.now() / 1000;
+		let time3 = (Math.floor(1200 - (time2 - time1)));
+		let minutes = Math.floor(time3 / 60);
+		let seconds = (time3 - (minutes * 60));
+		return [minutes, seconds];
 	}
 };

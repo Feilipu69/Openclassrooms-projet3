@@ -11,6 +11,12 @@ const Signature = {
 		this.mouseDown();
 		this.mouseUp();
 		this.mouseMove();
+		this.touchStart();
+		this.touchEnd();
+		this.touchMove();
+		this.scrollStart();
+		this.scrollEnd();
+		this.scrollMove();
 	},
 
 	// Evénement clic bouton de la souris
@@ -38,7 +44,7 @@ const Signature = {
 
 	// Coordonnées du pointeur de la souris dans le canvas
 	getMousePos(canvasDom, mouseEvent){
-		let rect = canvasDom.getBoundingClientRect();
+		let rect = canvasDom.getBoundingClientRect(); // renvoie la taille et la position du canvas par rapport à la zone d'affichage 
 		return {
 			x: mouseEvent.clientX - rect.left,
 			y: mouseEvent.clientY - rect.top
@@ -56,12 +62,82 @@ const Signature = {
 		}
 	},
 
+	// Enregistre le canvas vide
 	emptyRect(){
 		let empty = document.getElementById("canvas").toDataURL();
 		sessionStorage.setItem("emptyCanvas", empty);
 	},
 
-	// Message si pas de signature
+	// Evénements touch pour mobiles et tablettes
+	
+	// Evénement de contact sur l'écran
+	touchStart(){
+		this.canvas.addEventListener("touchstart", function(e){
+			this.mousePos = this.getTouchPos(this.canvas, e);
+			let touch = e.touches[0]; // touches[0] un seul objet ou doigt touche l'écran.
+			let mouseEvent = new MouseEvent("mousedown", {
+				clientX: touch.clientX,
+				clientY: touch.clientY
+			});
+			this.canvas.dispatchEvent(mouseEvent); // dispatchEvent() événements diffusés manuellement et de manière synchrone
+		}.bind(this), {passive: true});
+	},
+
+	// Evénement de fin de contact avec l'écran
+	touchEnd(){
+		this.canvas.addEventListener("touchend", function(e){
+			let mouseEvent = new MouseEvent("mouseup", {});
+			this.canvas.dispatchEvent(mouseEvent);
+		}.bind(this));
+	},
+
+	// Evénement de mouvment sur l'écran
+	touchMove(){
+		this.canvas.addEventListener("touchmove", function(e){
+			let touch = e.touches[0];
+			let mouseEvent = new MouseEvent("mousemove", {
+				clientX: touch.clientX,
+				clientY: touch.clientY
+			});
+			this.canvas.dispatchEvent(mouseEvent);
+		}.bind(this), {passive: true});
+	},
+
+	// coordonnées du point de contact dans le canvas
+	getTouchPos(canvasDom, touchEvent){
+		let rect = canvasDom.getBoundingClientRect();
+		return {
+			x: touchEvent.touches[0].clientX - rect.left,
+			y: touchEvent.touches[0].clientY - rect.top
+		};
+	},
+
+	// Prévient le scrolling lors du contact avec l'écran
+	scrollStart(){
+		window.addEventListener("touchstart", function(e){
+			if(e.target === this.canvas){
+				e.preventDefault(); // annule l'événement
+			}
+		}.bind(this), {passive: false}); // preventDefault() est autorisé
+	},
+
+	scrollEnd(){
+		window.addEventListener("touchend", function(e){
+			if(e.target === this.canvas){
+				e.preventDefault(); // annule l'événement 
+			}
+		}.bind(this));
+	},
+
+	scrollMove(){
+		window.addEventListener("touchmove", function(e){
+			if(e.target === this.canvas){
+				e.preventDefault(); // annule l'événement
+			}
+		}.bind(this), {passive: false}); // preventDefault() est autorisé.
+	},
+
+	// Affiche un message si il n'y a pas de signature dans canvas lors de la réservation
 	noSignature(){
 		this.context.font = "25px Arial";
 		this.context.fillStyle = "red";
