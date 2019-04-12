@@ -1,14 +1,14 @@
 const Booking = {
 	signature(){
 		$("#canvas").css("display", "block");
-		sign.emptyRect();
+		Signature.emptyRect();
 	},
 
 	// Validation de la réservation
 	bookingOk(){
 		$("#booking").on("click", function(){
 			if(sessionStorage.getItem("emptyCanvas") === document.getElementById("canvas").toDataURL()){
-				sign.noSignature();
+				Signature.noSignature();
 			} else {
 				localStorage.setItem("firstName", $("#firstName").val());
 				localStorage.setItem("lastName", $("#lastName").val());

@@ -7,7 +7,3 @@ slide.init($(".mySlides"), $(".prev"), $(".next"), $(".play"), $(".stop"));
 let town = Object.create(Map);
 town.init("nantes", 47.217, -1.553, 12);
 });
-
-// signature
-let sign = Object.create(Signature);
-sign.init(document.getElementById("canvas"), "white", 2);

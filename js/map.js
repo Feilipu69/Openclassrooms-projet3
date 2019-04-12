@@ -64,7 +64,7 @@ const Map = {
 			sessionStorage.clear(); // initialise sessionStorage
 			sessionStorage.setItem("station", this.deleteTheStationNumber(data.name));
 			sessionStorage.setItem("bikes", data.available_bikes);
-			sign.context.clearRect(0, 0, sign.canvas.width, sign.canvas.height);
+			Signature.context.clearRect(0, 0, 320, 160);
 			$("#data").css("display", "block");
 			$("#name").text("Station : " + sessionStorage.getItem("station")); 
 			$("#status").text("statut : " + data.status);
@@ -92,11 +92,13 @@ const Map = {
 			$("#firstName").val(localStorage.getItem("firstName"));
 			$("#identity").css("display", "block");
 			Booking.signature();
+			Signature.init(document.getElementById("canvas"), "white", 2);
 			$("#noBike").css("display", "none");
 		} else {
 			$("#identity").css("display", "block");
 			$("#noBike").css("display", "none");
 			Booking.signature();
+			Signature.init(document.getElementById("canvas"), "white", 2);
 		}
 	}
 };
