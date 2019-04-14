@@ -34,7 +34,6 @@ const Chrono = {
 			if(this.minutes === 0 && this.seconds === 0){
 				clearInterval(this.timeId);
 				sessionStorage.clear();
-				$("#bookingSignature").css("display", "none");
 			}
 		}.bind(this), 1000);
 	},
@@ -43,7 +42,6 @@ const Chrono = {
 		$("#min").text(this.minutes);
 		$("#sec").text(this.seconds);
 		clearInterval(this.timeId);
-		$("#countdown").css("display", "block");
 		this.countDown(); 
 	},
 	
