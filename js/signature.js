@@ -62,12 +62,6 @@ const Signature = {
 		}
 	},
 
-	// Enregistre le canvas vide
-	emptyRect(){
-		let empty = document.getElementById("canvas").toDataURL();
-		sessionStorage.setItem("emptyCanvas", empty);
-	},
-
 	// Evénements touch pour mobiles et tablettes
 	
 	// Evénement de contact sur l'écran
@@ -79,7 +73,7 @@ const Signature = {
 				clientX: touch.clientX,
 				clientY: touch.clientY
 			});
-			this.canvas.dispatchEvent(mouseEvent); // dispatchEvent() événements diffusés manuellement et de manière synchrone
+			this.canvas.dispatchEvent(mouseEvent); // dispatchEvent() applique l'événement mousedown à l'événement touchstart
 		}.bind(this), {passive: true});
 	},
 
@@ -87,7 +81,7 @@ const Signature = {
 	touchEnd(){
 		this.canvas.addEventListener("touchend", function(e){
 			let mouseEvent = new MouseEvent("mouseup", {});
-			this.canvas.dispatchEvent(mouseEvent);
+			this.canvas.dispatchEvent(mouseEvent); // applique l'événement mouseup à l'événement touchend
 		}.bind(this));
 	},
 
@@ -99,7 +93,7 @@ const Signature = {
 				clientX: touch.clientX,
 				clientY: touch.clientY
 			});
-			this.canvas.dispatchEvent(mouseEvent);
+			this.canvas.dispatchEvent(mouseEvent); // applique l'événement mousemove à l'événement touchmove
 		}.bind(this), {passive: true});
 	},
 
@@ -116,7 +110,7 @@ const Signature = {
 	scrollStart(){
 		window.addEventListener("touchstart", function(e){
 			if(e.target === this.canvas){
-				e.preventDefault(); // annule l'événement
+				e.preventDefault(); // annule l'événement touchstart dans la fenêtre lorsqu'on est dans le canvas
 			}
 		}.bind(this), {passive: false}); // preventDefault() est autorisé
 	},
@@ -132,17 +126,23 @@ const Signature = {
 	scrollMove(){
 		window.addEventListener("touchmove", function(e){
 			if(e.target === this.canvas){
-				e.preventDefault(); // annule l'événement
+				e.preventDefault(); // annule l'événement touchmove dans la fenêtre lorsqu'on est dans le canvas
 			}
 		}.bind(this), {passive: false}); // preventDefault() est autorisé.
 	},
 
-	// Affiche un message si il n'y a pas de signature dans canvas lors de la réservation
+	// Enregistre le canvas vide
+	emptyRect(){
+		let empty = document.getElementById("canvas").toDataURL();
+		sessionStorage.setItem("emptyCanvas", empty);
+	},
+
+	// Affiche un message si il manque une information du client
 	noSignature(){
 		this.context.font = "25px Arial";
 		this.context.fillStyle = "red";
 		this.context.fillText("Il manque une information.", 7, 80);
-		setTimeout(function(){
+		setTimeout(function(){ // retrait du message après deux secondes
 			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		}.bind(this), 2000);
 	}
