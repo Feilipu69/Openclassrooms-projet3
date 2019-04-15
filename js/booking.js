@@ -7,7 +7,7 @@ const Booking = {
 	// Validation de la réservation
 	bookingOk(){
 		$("#booking").on("click", function(){
-			if(sessionStorage.getItem("emptyCanvas") === document.getElementById("canvas").toDataURL()){
+			if(sessionStorage.getItem("emptyCanvas") === document.getElementById("canvas").toDataURL() || $("#lastName").val() === "" || $("#firstName").val() === ""){
 				Signature.noSignature();
 			} else {
 				localStorage.setItem("firstName", $("#firstName").val());

@@ -1,5 +1,5 @@
 // Slider
-var Slider = {
+const Slider = {
 	slideIndex: 0,
 	timer: null,
 

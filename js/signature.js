@@ -141,7 +141,7 @@ const Signature = {
 	noSignature(){
 		this.context.font = "25px Arial";
 		this.context.fillStyle = "red";
-		this.context.fillText("Vous avez oublié de signer.", 7, 80);
+		this.context.fillText("Il manque une information.", 7, 80);
 		setTimeout(function(){
 			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		}.bind(this), 2000);
