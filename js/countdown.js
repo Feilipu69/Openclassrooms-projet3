@@ -34,6 +34,7 @@ const Chrono = {
 			if(this.minutes === 0 && this.seconds === 0){
 				clearInterval(this.timeId);
 				sessionStorage.clear();
+				$("#bookingData").css("display", "none");
 			}
 		}.bind(this), 1000);
 	},
