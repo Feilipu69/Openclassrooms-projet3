@@ -46,7 +46,7 @@ const Map = {
 	// Accès aux données des stations et affiche les marqueurs bleus et rouges.
 	markers(){
 		ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=" + this.town + "&apiKey=1d19770d3b8d7e4e0b8de68d91b39e7badac5e5c", function(response){
-			let datas = JSON.parse(response);
+			let datas = JSON.parse(response); // Transforme la chaine de caractères au format JSON obtenue en objet JavaScript
 			datas.forEach(function(data){
 				if(data.available_bikes === 0){
 					this.markersDatas(data, {icon: this.redMarkerIcons});
