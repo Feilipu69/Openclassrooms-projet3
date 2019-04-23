@@ -24,9 +24,3 @@ function ajaxGet(url, callback) // callback est une fonction appelée
 	});
 	req.send(null);
 }
-
-// création de la fonction qui sera appelée avec callback
-function afficher(reponse)
-{
-	console.log(reponse); // lors de l'appel, reponse est remplacé par : req.responseText
-}
