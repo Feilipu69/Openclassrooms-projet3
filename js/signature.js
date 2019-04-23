@@ -85,7 +85,7 @@ const Signature = {
 		}.bind(this));
 	},
 
-	// Evénement de mouvment sur l'écran
+	// Evénement de mouvement sur l'écran
 	touchMove(){
 		this.canvas.addEventListener("touchmove", function(e){
 			let touch = e.touches[0];
