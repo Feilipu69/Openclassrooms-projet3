@@ -1,8 +1,8 @@
 const Slider = {
-	slideIndex: 0,
-	timer: null,
+	slideIndex: 0, // indice de la première image du diaporama
+	timer: null, // cf ligne 75 pour l'utilisation de timer dans le diaporama
 
-	init: function(mySlides, prev, next, start, stop){
+	init(mySlides, prev, next, start, stop){
 		this.slide = mySlides; // this.slide.length = 4 pour les 4 images du diaporama
 		this.btnPrev = prev; // btn = button
 		this.btnNext = next;
@@ -15,19 +15,19 @@ const Slider = {
 	},
 
 	// retrait de 1 à l'indice de l'objet this.slide
-	indexMinus: function(){
+	indexMinus(){
 		this.slideIndex -= 1;
 		this.showSlide();
 	},
 
 	// Ajout de 1 à l'indice de l'objet this.slide
-	indexPlus: function(){
+	indexPlus(){
 		this.slideIndex += 1;
 		this.showSlide();
 	},
 
 	// Affiche d'une image selon l'indice
-	showSlide: function(){
+	showSlide(){
 		this.slide.hide(); // tout le diaporama est caché
 
 		if (this.slideIndex < 0) { // si l'indice < 0 affiche la dernière image
@@ -41,7 +41,7 @@ const Slider = {
 		this.slide[this.slideIndex].style.display = "block"; // affiche une image avec un indice précis
 	},
 
-	previous: function(){
+	previous(){
 		// bouton image précédente
 		this.btnPrev.click(function(){
 			this.indexMinus(); // retire 1 à l'indice 
@@ -55,7 +55,7 @@ const Slider = {
 		}.bind(this));
 	},
 
-	next: function(){
+	next(){
 		// bouton image suivante
 		this.btnNext.click(function(){
 			this.indexPlus();
@@ -70,14 +70,14 @@ const Slider = {
 	},
 
 	// défilement du diaporama toutes les 5 secondes
-	automatic: function(){
+	automatic(){
 		this.showSlide();
 		this.timer = setInterval(function(){
 			this.indexPlus(); // ajout de 1 à l'indice toutes les 5s
 		}.bind(this), 5000);
 	},
 
-	playStop: function(){
+	playStop(){
 		// mise en route du diaporama lors du clique sur le bouton play
 		this.btnStart.click(function(){
 			this.automatic();
@@ -85,7 +85,7 @@ const Slider = {
 
 		// arrêt du diaporama lors du clique sur le bouton stop
 		this.btnStop.click(function(){
-			clearInterval(this.timer);
+			clearInterval(this.timer); // stoppe l'exécution de la ligne 75
 		}.bind(this));
 	}
 };
