@@ -23,9 +23,9 @@
 	</head>
 	<body>
 		<h1>Cyclos dispos</h1>
-		<!-- Slideshow container -->
+		<!-- élément du diaporama -->
 		<div class="slideshow-container">
-			<!--images blocks -->
+			<!--éléments des images -->
 			<figure class="mySlides"> 
 				<img src="images/bicloo.jpg" alt="image vélo" />
 				<figcaption>Bienvenue sur notre site de réservation de vélo</figcaption>
@@ -43,21 +43,24 @@
 				<figcaption>Signez, votre vélo sera réservé durant 20mn. Merci</figcaption>
 			</figure>
 
-			<!-- Next and previous buttons -->
+			<!-- Boutons suivant et précédent -->
 			<a class="prev"><i class="fas fa-bicycle"></i></a>
 			<a class="next"><i class="fas fa-bicycle"></i></a>
 		</div>
 
+		<!-- Boutons play et stop -->
 		<div class="playStopButton">
 			<button class="play">Play</button>
 			<button class="stop">Stop</button>
 		</div>
 
 		<div id="mapAndData">
-			<div id="mapAndBooking">
+			<!-- carte -->
+			<div id="map">
 				<div id="mapid"></div>
 			</div>
 
+			<!-- informations de la station et formulaire -->
 			<div id="data">
 				<p id="name"></p>
 				<p id="status"></p>
@@ -65,7 +68,7 @@
 				<p id="place"></p>
 				<p id="available"></p>
 				<p id="bike"></p>
-				<div id="identity">
+				<div id="identity"> <!-- formulaire -->
 					<p><label for="lastName">Nom </label><input type="text" id="lastName" /></p>
 					<p><label for="firstName">Prénom </label><input type="text" id="firstName" /></p>
 					<canvas id="canvas" width="320" height="160">
@@ -77,12 +80,14 @@
 			</div>
 		</div>
 
+		<!-- informations de la réservations -->
 		<div id="bookingData">
 			<div id="addressAndName"></div>
 			<div id="countdown">
 				Temps restant avant expiration de la réservation <span id="min"></span> min <span id="sec"></span> sec
 			</div>
 		</div>
+
 		<script src="js/ajax.js"></script>
 		<script src="js/lib/jquery-3.3.1.js"></script>
 		<script src="js/slider.js"></script>
