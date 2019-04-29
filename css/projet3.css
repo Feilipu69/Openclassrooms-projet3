@@ -78,7 +78,7 @@ figcaption{
 	margin-top: 30px;
 }
 
-#mapAndBooking{
+#map{
 	width: 70%;
 	display: flex;
 	flex-direction: column;
@@ -155,7 +155,7 @@ figcaption{
 		right: -4px;
 	}
 
-	#mapAndBooking {
+	#map {
 		width: 100%;
 	}
 
