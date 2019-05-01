@@ -110,7 +110,7 @@ const Signature = {
 	scrollStart(){
 		window.addEventListener("touchstart", function(e){
 			if(e.target === this.canvas){
-				e.preventDefault(); // annule l'événement touchstart dans la fenêtre lorsqu'on est dans le canvas
+				e.preventDefault(); // annule le scroll lorsqu'on est dans le canvas
 			}
 		}.bind(this), {passive: false}); // preventDefault() est autorisé
 	},
@@ -126,7 +126,7 @@ const Signature = {
 	scrollMove(){
 		window.addEventListener("touchmove", function(e){
 			if(e.target === this.canvas){
-				e.preventDefault(); // annule l'événement touchmove dans la fenêtre lorsqu'on est dans le canvas
+				e.preventDefault(); // annule le scroll lorsqu'on est dans le canvas
 			}
 		}.bind(this), {passive: false}); // preventDefault() est autorisé.
 	},
