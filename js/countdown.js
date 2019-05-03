@@ -49,7 +49,7 @@ const Chrono = {
 	calculateTime(){
 		let time1 = sessionStorage.getItem("clock") / 1000;
 		let time2 = Date.now() / 1000;
-		let time3 = Math.floor(1200 - (time2 - time1));
+		let time3 = Math.floor(1200 - (time2 - time1)); // 1200 = 20 minutes en secondes
 		let minutes = Math.floor(time3 / 60);
 		let seconds = (time3 - (minutes * 60));
 		return [minutes, seconds];
