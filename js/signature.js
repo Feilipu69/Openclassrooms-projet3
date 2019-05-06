@@ -55,10 +55,10 @@ const Signature = {
 	renderCanvas(){
 		if(this.drawing){ // Si this.drawing = true càd événement mousedown.
 			this.context.beginPath(); // Commence un nouveau chemin de dessin
-			this.context.moveTo(this.lastPos.x, this.lastPos.y); // Emplacement du point de départ du chemin
-			this.context.lineTo(this.mousePos.x, this.mousePos.y); // Points successifs du chemin
-			this.context.stroke(); // Tracé du chemin
-			this.lastPos = this.mousePos;
+			this.context.moveTo(this.lastPos.x, this.lastPos.y); // Point A du chemin 
+			this.context.lineTo(this.mousePos.x, this.mousePos.y); // Point B du chemin
+			this.context.stroke(); // Tracé du chemin du point A au point B
+			this.lastPos = this.mousePos;// La dernière position du pointeur devient le point A, ce qui permet de tracer une ligne point par point. 
 		}
 	},
 
