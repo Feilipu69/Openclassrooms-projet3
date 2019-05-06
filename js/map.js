@@ -46,12 +46,12 @@ const Map = {
 	// Accès aux données des stations et affiche les marqueurs bleus et rouges.
 	markers(){
 		ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=" + this.town + "&apiKey=1d19770d3b8d7e4e0b8de68d91b39e7badac5e5c", function(response){
-			let datas = JSON.parse(response); // Transforme la chaine de caractères au format JSON obtenue en objet JavaScript
-			datas.forEach(function(data){
-				if(data.available_bikes === 0){
-					this.markersDatas(data, {icon: this.redMarkerIcons});
+			let stationsDatas = JSON.parse(response); // Transforme la chaine de caractères au format JSON obtenue en objet JavaScript
+			stationsDatas.forEach(function(stationData){
+				if(stationData.available_bikes === 0){
+					this.markersDatas(stationData, {icon: this.redMarkerIcons});
 				} else {
-					this.markersDatas(data, null);
+					this.markersDatas(stationData, null);
 				}
 			}.bind(this));
 		}.bind(this));
@@ -59,29 +59,29 @@ const Map = {
 
 	
 	// CLIC SUR UN MARQUEUR affiche les informations 
-	markersDatas(data, color){
-		L.marker(data.position, color).addTo(this.townMap).on("click", function(){
+	markersDatas(stationData, color){
+		L.marker(stationData.position, color).addTo(this.townMap).on("click", function(){
 			sessionStorage.clear(); // initialise sessionStorage
-			sessionStorage.setItem("station", this.deleteTheStationNumber(data.name));
-			sessionStorage.setItem("bikes", data.available_bikes);
+			sessionStorage.setItem("station", this.deleteTheStationNumber(stationData.name));
+			sessionStorage.setItem("bikes", stationData.available_bikes);
 			Signature.context.clearRect(0, 0, 320, 160);
 			$("#data").css("display", "block");
 			$("#name").text("Station : " + sessionStorage.getItem("station")); 
-			$("#status").text("statut : " + data.status);
-			$("#address").text("Adresse : " + this.deleteTheStationNumber(data.address));
-			$("#place").text(data.bike_stands + " places.");
-			$("#available").text(data.available_bike_stands + " places disponibles.");
-			$("#bike").text(data.available_bikes + " vélos disponibles.");
+			$("#status").text("statut : " + stationData.status);
+			$("#address").text("Adresse : " + this.deleteTheStationNumber(stationData.address));
+			$("#place").text(stationData.bike_stands + " places.");
+			$("#available").text(stationData.available_bike_stands + " places disponibles.");
+			$("#bike").text(stationData.available_bikes + " vélos disponibles.");
 			$("#bookingData").css("display", "none");
-			this.availableBikes(data);
+			this.availableBikes(stationData);
 		}.bind(this));
 	},
 
 	// Si aucun vélo n'est disponible affiche un message 
 	// Si le nom et le prénom sont stockés, le formulaire est prérempli 
 	// Sinon affiche le formulaire vierge.
-	availableBikes(data){
-		if(data.available_bikes === 0){
+	availableBikes(stationData){
+		if(stationData.available_bikes === 0){
 			$("#identity").css("display", "none");
 			$("#bookingData").css("display", "none");
 			$("#canvas").css("display", "none");
