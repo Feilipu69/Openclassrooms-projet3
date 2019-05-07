@@ -1,11 +1,11 @@
 const Signature = {
+	context: this.canvas.getContext("2d"),
 	drawing: false,
 	mousePos: {x: 0, y: 0},
 	lastPos: this.mousePos,
-	context: this.canvas.getContext("2d"),
 
-	init(canvas, color, line){
-		this.canvas = canvas;
+	init(canvasElt, color, line){
+		this.canvas = canvasElt;
 		this.context.strokeStyle = color;
 		this.context.lineWidth = line;
 		this.mouseDown();
