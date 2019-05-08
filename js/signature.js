@@ -91,7 +91,7 @@ const Signature = {
 	getTouchPos(canvasDom, touchEvent){
 		let rect = canvasDom.getBoundingClientRect();
 		return {
-			x: touchEvent.touches[0].clientX - rect.left,
+			x: touchEvent.touches[0].clientX - rect.left, // touches[0] : un seul medium touche l'écran (stylet ou doigt)
 			y: touchEvent.touches[0].clientY - rect.top
 		};
 	},
