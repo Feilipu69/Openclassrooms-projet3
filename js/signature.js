@@ -67,33 +67,23 @@ const Signature = {
 	// Evénement de contact sur l'écran
 	touchStart(){
 		this.canvas.addEventListener("touchstart", function(e){
-			this.mousePos = this.getTouchPos(this.canvas, e);
-			let touch = e.touches[0]; // touches[0] un seul objet ou doigt touche l'écran.
-			let mouseEvent = new MouseEvent("mousedown", {
-				clientX: touch.clientX,
-				clientY: touch.clientY
-			});
-			this.canvas.dispatchEvent(mouseEvent); // dispatchEvent() applique l'événement mousedown à l'événement touchstart
+			this.drawing = true;
+			this.lastPos = this.getTouchPos(this.canvas, e);
 		}.bind(this), {passive: true});
 	},
 
 	// Evénement de fin de contact avec l'écran
 	touchEnd(){
-		this.canvas.addEventListener("touchend", function(e){
-			let mouseEvent = new MouseEvent("mouseup", {});
-			this.canvas.dispatchEvent(mouseEvent); // applique l'événement mouseup à l'événement touchend
+		this.canvas.addEventListener("touchend", function(){
+			this.drawing = false;
 		}.bind(this));
 	},
 
 	// Evénement de mouvement sur l'écran
 	touchMove(){
 		this.canvas.addEventListener("touchmove", function(e){
-			let touch = e.touches[0];
-			let mouseEvent = new MouseEvent("mousemove", {
-				clientX: touch.clientX,
-				clientY: touch.clientY
-			});
-			this.canvas.dispatchEvent(mouseEvent); // applique l'événement mousemove à l'événement touchmove
+			this.mousePos = this.getTouchPos(this.canvas, e);
+			this.renderCanvas();
 		}.bind(this), {passive: true});
 	},
 
