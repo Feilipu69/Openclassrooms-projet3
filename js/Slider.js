@@ -34,11 +34,11 @@ const Slider = {
 			this.slideIndex = this.slide.length - 1;
 		}
 
-		if (this.slideIndex > this.slide.length - 1) { // si l'indice est > 4 affiche la première image
+		if (this.slideIndex > this.slide.length - 1) { // si l'indice est > au nombre total d'images, affiche la première image
 			this.slideIndex = 0;
 		}
 
-		this.slide[this.slideIndex].style.display = "block"; // affiche une image avec un indice précis
+		this.slide[this.slideIndex].style.display = "block"; // affiche l'image selon l'indice.
 	},
 
 	previous(){
