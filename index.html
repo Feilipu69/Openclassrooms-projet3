@@ -26,19 +26,19 @@
 		<!-- élément du diaporama -->
 		<div class="slideshow-container">
 			<!--éléments des images -->
-			<figure class="mySlides"> 
+			<figure hidden class="mySlides"> 
 				<img src="images/bicloo.jpg" alt="image vélo" />
 				<figcaption>Bienvenue sur notre site de réservation de vélo</figcaption>
 			</figure>
-			<figure class="mySlides">
+			<figure hidden class="mySlides">
 				<img src="images/map.png" alt="carte" />
 				<figcaption>Choisissez une station.</figcaption>
 			</figure>
-			<figure class="mySlides">
+			<figure hidden class="mySlides">
 				<img src="images/identity.png" alt="formulaire" />
 				<figcaption>Entrez vos nom et prénom.</figcaption>
 			</figure>
-			<figure class="mySlides">
+			<figure hidden class="mySlides">
 				<img src="images/signature.png" alt="signature" />
 				<figcaption>Signez, votre vélo sera réservé durant 20mn. Merci</figcaption>
 			</figure>
@@ -50,8 +50,8 @@
 
 		<!-- Boutons play et stop -->
 		<div class="playStopButton">
-			<button class="play">Play</button>
-			<button class="stop">Stop</button>
+			<button class="play">Marche</button>
+			<button class="stop">Arrêt</button>
 		</div>
 
 		<div id="mapAndData">
@@ -61,7 +61,7 @@
 			</div>
 
 			<!-- informations de la station et formulaire -->
-			<div id="data">
+			<div hidden id="data">
 				<p id="name"></p>
 				<p id="status"></p>
 				<p id="address"></p>
@@ -71,7 +71,7 @@
 				<div id="identity"> <!-- formulaire -->
 					<p><label for="lastName">Nom </label><input type="text" id="lastName" /></p>
 					<p><label for="firstName">Prénom </label><input type="text" id="firstName" /></p>
-					<canvas id="canvas" width="320" height="160">
+					<canvas hidden id="canvas" width="320" height="160">
 						Votre navigateur ne supporte pas cet élément
 					</canvas>
 					<p><button id="booking">Réservation</button></p>
@@ -81,7 +81,7 @@
 		</div>
 
 		<!-- informations de la réservations -->
-		<div id="bookingData">
+		<div hidden id="bookingData">
 			<div id="addressAndName"></div>
 			<div id="countdown">
 				Temps restant avant expiration de la réservation <span id="min"></span> min <span id="sec"></span> sec
@@ -90,11 +90,11 @@
 
 		<script src="js/ajax.js"></script>
 		<script src="js/lib/jquery-3.3.1.js"></script>
-		<script src="js/slider.js"></script>
-		<script src="js/map.js"></script>
-		<script src="js/booking.js"></script>
-		<script src="js/signature.js"></script>
-		<script src="js/countdown.js"></script>
+		<script src="js/Slider.js"></script>
+		<script src="js/Map.js"></script>
+		<script src="js/Booking.js"></script>
+		<script src="js/Signature.js"></script>
+		<script src="js/Countdown.js"></script>
 		<script src="js/main.js"></script>
 	</body>
 </html>
