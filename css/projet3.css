@@ -13,10 +13,6 @@ h1 {
 	color: white;
 	text-align: center;
 }
-/* Cache les images par défaut */
-.mySlides {
-	display: none;
-}
 
 /* Taille des images */
 .mySlides img {
@@ -98,7 +94,6 @@ figcaption{
 	color: white;
 	border: 2px solid black;
 	border-radius: 10px;
-	display: none;
 }
 
 /* Si il n'y a pas de vélo disponible */
@@ -114,7 +109,6 @@ figcaption{
 	border-radius: 10px;
 	padding: 20px;
 	color: white;
-	display: none;
 	flex-direction: column;
 	justify-content: space-around;
 	margin: auto;
@@ -127,7 +121,6 @@ figcaption{
 }
 
 #canvas {
-	display: none;
 	margin-right: 130px;
 	border: 2px solid black;
 	border-radius: 10px;
