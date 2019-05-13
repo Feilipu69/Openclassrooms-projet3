@@ -1,17 +1,18 @@
 body{
 	background-image: url(../images/green004.jpg);
 }
-/* Diaporama */
-.slideshow-container {
-	max-width: 1000px;
-	position: relative;
-	margin: auto;
-}
 
 h1 {
 	font-size: 50px;
 	color: white;
 	text-align: center;
+}
+
+/* Diaporama */
+.slideshow-container {
+	max-width: 1000px;
+	position: relative;
+	margin: auto;
 }
 
 /* Taille des images */
