@@ -94,10 +94,6 @@ figcaption{
 	color: white;
 	border: 2px solid black;
 	border-radius: 10px;
-<<<<<<< HEAD
-=======
-	/*display: none;*/
->>>>>>> c907202a7662e303c8d68d13c49ddbe269d8dcc5
 }
 
 /* Si il n'y a pas de vélo disponible */
@@ -115,10 +111,6 @@ figcaption{
 	border-radius: 10px;
 	padding: 20px;
 	color: white;
-<<<<<<< HEAD
-=======
-	/*display: none;*/
->>>>>>> c907202a7662e303c8d68d13c49ddbe269d8dcc5
 	flex-direction: column;
 	justify-content: space-around;
 	margin: auto;
@@ -131,10 +123,6 @@ figcaption{
 }
 
 #canvas {
-<<<<<<< HEAD
-=======
-	/*display: none;*/
->>>>>>> c907202a7662e303c8d68d13c49ddbe269d8dcc5
 	margin-right: 130px;
 	border: 2px solid black;
 	border-radius: 10px;
