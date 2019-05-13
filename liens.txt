@@ -1,5 +1,0 @@
-URL :
-https://www.apprenti-developpeur.fr/projet3
-
-lien github :
-https://github.com/Feilipu69/Openclassrooms-projet3
