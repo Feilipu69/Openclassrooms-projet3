@@ -26,26 +26,26 @@
 		<!-- élément du diaporama -->
 		<div class="slideshow-container">
 			<!--éléments des images -->
-			<figure class="mySlides"> 
+			<figure hidden class="mySlides"> 
 				<img src="images/bicloo.jpg" alt="image vélo" />
 				<figcaption>Bienvenue sur notre site de réservation de vélo</figcaption>
 			</figure>
-			<figure class="mySlides">
+			<figure hidden class="mySlides">
 				<img src="images/map.png" alt="carte" />
 				<figcaption>Choisissez une station.</figcaption>
 			</figure>
-			<figure class="mySlides">
+			<figure hidden class="mySlides">
 				<img src="images/identity.png" alt="formulaire" />
 				<figcaption>Entrez vos nom et prénom.</figcaption>
 			</figure>
-			<figure class="mySlides">
+			<figure hidden class="mySlides">
 				<img src="images/signature.png" alt="signature" />
 				<figcaption>Signez, votre vélo sera réservé durant 20mn. Merci</figcaption>
 			</figure>
 
 			<!-- Boutons suivant et précédent -->
-			<a class="prev"><i class="fas fa-bicycle"></i> <strong>&gt;</strong></a>
-			<a class="next"><i class="fas fa-bicycle"></i> <strong>&gt;</strong></a>
+			<a class="prev"><i class="fas fa-bicycle"></i></a> 
+			<a class="next"><i class="fas fa-bicycle"></i></a>
 		</div>
 
 		<!-- Boutons play et stop -->
@@ -61,7 +61,7 @@
 			</div>
 
 			<!-- informations de la station et formulaire -->
-			<div id="data">
+			<div hidden id="data">
 				<p id="name"></p>
 				<p id="status"></p>
 				<p id="address"></p>
@@ -71,7 +71,7 @@
 				<div id="identity"> <!-- formulaire -->
 					<p><label for="lastName">Nom </label><input type="text" id="lastName" /></p>
 					<p><label for="firstName">Prénom </label><input type="text" id="firstName" /></p>
-					<canvas id="canvas" width="320" height="160">
+					<canvas hidden id="canvas" width="320" height="160">
 						Votre navigateur ne supporte pas cet élément
 					</canvas>
 					<p><button id="booking">Réservation</button></p>
@@ -81,7 +81,7 @@
 		</div>
 
 		<!-- informations de la réservations -->
-		<div id="bookingData">
+		<div hidden id="bookingData">
 			<div id="addressAndName"></div>
 			<div id="countdown">
 				Temps restant avant expiration de la réservation <span id="min"></span> min <span id="sec"></span> sec
