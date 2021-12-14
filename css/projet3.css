@@ -55,8 +55,10 @@ figcaption{
 
 /* Boutons play et stop */
 .playStopButton {
-	width: 145px;
+	width: 200px;
 	margin: auto;
+	display: flex;
+	justify-content: space-between;
 }
 
 .play, .stop {
