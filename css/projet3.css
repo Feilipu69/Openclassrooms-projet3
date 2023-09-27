@@ -9,82 +9,33 @@ h1 {
 }
 
 /* Diaporama */
-/*
 .slideshow-container {
-	max-width: 1000px;
-	position: relative;
-	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-*/
 
-/* Taille des images */
-/*
+.button {
+	width: 50px;
+	height: 30px;
+	font-weight: bold;
+	font-size: 20px;
+	background: linear-gradient(#8EAFC5, #2b82ca);
+	color: white;
+	border-radius: 10px;
+	border: 2px solid white;
+}
+
 .mySlides img {
-	width: 80%;
-	margin-left: 95px;
 	border: 2px solid white;
 	border-radius: 10px;
 }
-*/
-/* Phrases explicatives */
-/*
-figcaption{
+
+figcaption {
 	color: white;
-	font-size: 1.5em;
 	text-align: center;
 }
-*/
-/* Boutons avant et après */
-/*
-.prev, .next {
-	position: absolute;
-	top: 45%;
-	width: auto;
-	margin-top: -22px;
-	margin-left: 44px;
-	padding: 10px;
-	color: white;
-	font-size: 18px;
-	border-radius: 20px;
-	background: linear-gradient(#8EAFC5, #2b82ca);
-}
 
-.prev .fas {
-	transform: rotateY(180deg);
-	-webkit-transform: rotateY(180deg);
-}
-
-.next {
-	right: 40px;
-}
-*/
-
-	.slideshow-container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.button {
-		width: 50px;
-		height: 30px;
-		font-weight: bold;
-		font-size: 20px;
-		background: linear-gradient(#8EAFC5, #2b82ca);
-		color: white;
-		border-radius: 10px;
-		border: 2px solid white;
-	}
-
-	.mySlides img {
-		border: 2px solid white;
-		border-radius: 10px;
-	}
-
-	figcaption {
-		color: white;
-		text-align: center;
-	}
 /* Boutons play et stop */
 .playStopButton {
 	width: 200px;
