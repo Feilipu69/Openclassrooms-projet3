@@ -26,9 +26,15 @@ h1 {
 	border: 2px solid white;
 }
 
-.mySlides img {
+figure {
 	border: 2px solid white;
 	border-radius: 10px;
+	padding: 10px;
+}
+
+.mySlides img {
+	border-radius: 10px;
+	width: 550px;
 }
 
 figcaption {
@@ -51,13 +57,14 @@ figcaption {
 	border-radius: 10px;
 	color: #0a5f66;
 	background-color: white;
+	font-weight: bold;
 }
 
 /* Bloc conteneur de mapid et data ci dessous */
 #mapAndData {
 	display: flex;
 	justify-content: space-around;
-	margin-top: 30px;
+	margin-top: 100px;
 }
 
 #map{
@@ -78,8 +85,17 @@ figcaption {
 	margin-right: 30px;
 	padding: 20px;
 	color: white;
-	border: 2px solid black;
+	border: 2px solid white;
 	border-radius: 10px;
+}
+
+#lastName {
+	margin-left: 22px;
+}
+
+#booking {
+	color: #0a5f66;
+	font-weight: bold;
 }
 
 /* Si il n'y a pas de vélo disponible */
@@ -108,7 +124,7 @@ figcaption {
 
 #canvas {
 	margin-right: 130px;
-	border: 2px solid black;
+	border: 2px solid white;
 	border-radius: 10px;
 	background: linear-gradient(#8EAFC5, #2b82ca);
 }
