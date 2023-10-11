@@ -1,4 +1,4 @@
-$(document).ready(function(){ // Tout se lance une fois la page chargée
+$(document).ready(() => { // Tout se lance une fois la page chargée
 	// slider
 	let slide = Object.create(Slider);
 	slide.init($(".mySlides"), $(".prev"), $(".next"), $(".play"), $(".stop"));
