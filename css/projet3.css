@@ -60,6 +60,10 @@ figcaption {
 	font-weight: bold;
 }
 
+.play, .stop, .button {
+	cursor: pointer;
+}
+
 /* Bloc conteneur de mapid et data ci dessous */
 #mapAndData {
 	display: flex;
